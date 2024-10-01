@@ -9,25 +9,25 @@ class Database:
             self.update()
     def create(self):
         if os.path.exists(self.database_name):
-            print(self.database_name, 'exists%')
+            print(self.database_name, 'existed%')
             return False
-        print(self.database_name, 'creating$')
+        print(self.database_name, 'created$')
         return self.update()
     def read(self):
         """ return all table names, tables return all data ids, and data will return itself? """
-        print(self.database_name + ', returning table names^')
+        print(self.database_name + ', returned table names^')
         cursor = self.connection.cursor()
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
         return cursor.fetchall()
     def update(self):
-        print(self.database_name, 'connecting#')
+        print(self.database_name, 'connected#')
         self.connection = sqlite3.connect(self.database_name, check_same_thread=False)
         return True
     def down(self):
         """ it is true that it is down, it is false that it is down """
         if self.connection:
             self.connection.close()
-            print(self.database_name, 'closing connection@')
+            print(self.database_name, 'closed connection@')
             return False
         print(self.database_name, 'connection closed!')
         return True
