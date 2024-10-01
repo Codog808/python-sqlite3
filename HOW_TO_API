@@ -1,0 +1,59 @@
+UI vs. API
+User Interfaces, or UIs, are ways for humans to interact with computers
+
+Application Programming Interfaces, or APIs, are ways for machine components/usrs to interact with computers. 
+
+UIs and APIs are both subsets of interfaces.
+UIs require APIs and therefore UIs are a subset of APIs
+
+APIs, in a personal context, will be web based.
+Used to transfer data from docker container to docker container.
+Culminating in collecting data various sources.
+
+Fundamentals of an API
+	Endpoints (URLs or URIs):
+		Locations where API resources can be called upon to be accessed
+	Methods
+		Actions that can pull resources,
+			Corresponding to an HTTP method like GET, POST, PUT, DELETE, or etc
+	Requests and responses
+		The data format being sent or recieved from the APi.
+			JSON or XML are common formats
+	Authentication and Authorization
+		Identifying the client and giving them the correct permissions/resources
+			similar to having a root-user/admin-user and their high capabilities
+			and a normal user wihtout special permissions as root.
+	Error Handling
+		How to communicate problems.
+			usually through error codes.
+
+RESTful API
+	Naming URLs (Endpoints)
+		1. Using nouns and have neutral wording for resources simplifies naming convetions 
+		and creates perdictability in naming, therefore, creating ease of usage.
+		2. Plural nouns would be used for collections
+		3. Heiracrhical Strucutre for Nested Resources
+		4. Use of lowercase and hyphens only for naming
+		5. Use of consistency
+		6. And versioning, so if https://baseurl/V1/user-items wants to be changed 
+		to just /users/{range of items}, 
+		versioning can allow V1 requests to be parsed 
+		and have this mew version to be a part of V2; 
+		Allowing for obsolete code to still work with the API.
+	Methods
+		HTTP Methods and Usage
+			GET: Retrieves
+			POST: Creates
+			PUT: Replace existing resource
+			PATCH: Replace part of existing resource
+			DELETE: Removes resource
+		Idempotency: Where the same request produces the same result
+			GET, PUT, and DELETE are idempotent
+
+			POST is not idempotent, as each request should create a new resource.
+		Status Codes
+			200: OK
+			201: Created; successful POST
+			400: Bad Request
+			404: Not Found
+			500: server side error

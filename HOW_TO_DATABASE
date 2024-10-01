@@ -1,0 +1,60 @@
+(C)reate
+(R)ead
+(U)pdate
+(D)elete
+
+the difference between databases and text files: 
+	Databases are higher orderly: 
+		Following rules determined by the 'schema';
+		This allows consistency and integrity;
+		Efficient data retrieval.
+	text files are orderly but...:
+		there is no high order schema,
+		the order is only based on the ruleset of possible characters.
+	The higher the order the better it becomes at a specific task, data storage.
+
+Required database features:
+	CRUD;
+	Keeping things simple is to prevent stupidity, don't go beyond what is necessary.
+	'Higher ordered things are only good for "specific" tasks'.
+
+	databases requires CRUD;
+		Specifically creating a database file initially.
+		Being able to get all information from the database file
+		Update any information within such file
+		Delete any infromation within such file
+		tables requires CRUD;
+			Specifically creating database tables
+			being able to get all information from a table
+			update any information with that table
+			delete any information in such table
+			data requires CRUD;
+			create data for database tables
+			read specific data from a table
+			update that data
+			delete that data
+	Focus on creating functionality that specifically works for the three levels of databases.
+
+	database requires interface;
+		interface via servers, for docker usage, for replicability among machines.
+
+Structuring data:
+	All data is like identifying a human;
+	A human's data is its story.
+	It's important information is the identifying qualities of that human.
+
+	There are humans everywhere in the world, 
+	but most of them are unknown, 
+	when they become known they become special/focused
+
+	(P)hotograph(s): Visual representation of the data
+	(I)dentifying number(s): ID, SS, population #
+	(C)itzenship(s): nationality, origin of birth
+	(T)rait(s): eye color, tags, associations
+	(U)unique metric(s): sha256, iris, fingerprint
+	(R)esidence(s): current or previous addresses
+	(E)ntourage(s): family, friends, associations
+	(D)ate of birth
+
+	this 7 word acronym will function as datapoints for all future data.
+		even better because data is a snapshot in time of this person/item.
