@@ -3,7 +3,7 @@ import json
 
 class CRUD_API_CLIENT:
     def __init__(self):
-        self.url = 'http://127.0.0.1:5000/!/@/data'
+        self.url = 'http://127.0.0.1:5000/v1/!/@/data'
 
     def Database_create(self, database_name):
         database_url = self.url.split('!')[0] + database_name
