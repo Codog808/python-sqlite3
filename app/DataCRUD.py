@@ -3,6 +3,17 @@ import os
 import sqlite3
 from DatabaseCRUD import Database
 from TableCRUD import Table
+import json
+
+def is_valid_json(value):
+    # Ensure the value is not empty and is a valid JSON string
+    if value is None or value == '':
+        return False
+    try:
+        json.loads(value)
+        return True
+    except:
+        return False
 
 class Data:
     def __init__(self, table: Table):
@@ -34,7 +45,7 @@ class Data:
         if row:
             column_names = [description[0] for description in cursor.description]
             record = dict(zip(column_names, row))
-            record = {k: json.loads(v) if k != 'id' and k != 'date_of_birth' else v for k, v in record.items()}
+            record = {k: json.loads(v) if is_valid_json(v) else v for k, v in record.items()}
             print('item',id_, 'returned')
             return record
         print('item', id_, 'does not exist')
@@ -47,7 +58,7 @@ class Data:
         cursor = self.connection.cursor()
         cursor.execute(update_sql, values)
         self.connection.commit()
-        print("Item", cursor.lastrowid, "updated correctly")
+        print("Item", pictured_dictionary['id'], "updated correctly")
         return True
     def delete(self, id_):
         cursor = self.connection.cursor()
@@ -69,20 +80,13 @@ if __name__ == '__main__':
         'date_of_birth': '1990-01-01'
     }
 
-    db = Database('example.db')
-    table = Table('gayshit', db)
+    db = Database('data18.db')
+    table = Table('scenes', db)
     data = Data(table)
-    data.create(test_data)
     t = table.read('id')
-    for i in range(t[-1][0], (t[-1][0] + 10)):
-        test_data['id'] = i
-        data.create(test_data)
-    d = data.read(test_data['id'])
-    print("first data returned")
-    print(d)
-    d['uniques']['shit'] = 'brown'
-    data.update(d)
-    dd = data.read(d['id'])
-    print("second data returned, focus on 'uniques'")
-    print(dd)
+    print(t)
+    for id_ in t:
+        d = data.read(str(id_))
+        print(d)
+
 

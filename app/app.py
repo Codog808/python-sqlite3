@@ -110,11 +110,11 @@ class CRUD_API:
             else:
                 return jsonify({'error': 'Wrong database pathing'}), 402
 
-        @self.app.route('/v1/<database_name>/<table_name>/data/<int:id>', methods=['GET'])
-        def Data_read(database_name, table_name, id):
+        @self.app.route('/v1/<database_name>/<table_name>/data/<int:id_>', methods=['GET'])
+        def Data_read(database_name, table_name, id_):
             if self.Table_good(database_name, table_name):
                 data = Data(self.table)
-                record = data.read(id)
+                record = data.read(id_)
                 if record:
                     return jsonify(record), 200
                 else:
@@ -127,21 +127,22 @@ class CRUD_API:
             if self.Table_good(database_name, table_name):
                 data = Data(self.table)                                                               
                 record = request.json  # New data that will replace the existing one
+                id_ = record['id']
                 if data.update(record):  # Assuming the `update` method updates the record by ID
-                    return jsonify({'message': f'PICTURED with ID {id} updated in {table_name} successfully'}), 201
+                    return jsonify({'message': f'PICTURED with ID {id_} updated in {table_name} successfully'}), 201
                 else:
-                    return jsonify({'error': f'PICTURED with ID {id} not found'}), 404
+                    return jsonify({'error': f'PICTURED with ID {id_} not found'}), 404
             else:                                  
                 return jsonify({'error': 'Wrong database pathing'}), 400
 
-        @self.app.route('/v1/<database_name>/<table_name>/data/<int:id>', methods=['DELETE'])
-        def Data_delete(database_name, table_name, id):
+        @self.app.route('/v1/<database_name>/<table_name>/data/<int:id_>', methods=['DELETE'])
+        def Data_delete(database_name, table_name, id_):
             if self.Table_good(database_name, table_name):
                 data = Data(self.table)
-                if data.delete(id):  # Assuming the delete method removes the record by ID
-                    return jsonify({'message': f'Record with ID {id} deleted from {table_name} successfully'}), 200
+                if data.delete(id_):  # Assuming the delete method removes the record by ID
+                    return jsonify({'message': f'Record with ID {id_} deleted from {table_name} successfully'}), 200
                 else:
-                    return jsonify({'error': f'Record with ID {id} not found'}), 404
+                    return jsonify({'error': f'Record with ID {id_} not found'}), 404
             else:
                 return jsonify({'error': 'Wrong database pathing'}), 400
 

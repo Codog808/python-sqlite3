@@ -40,21 +40,17 @@ class CRUD_API_V1_CLIENT:
     def Data_create(self, database_name, table_name, data_json):
         data_url = self.url.split('!')[0] + database_name + '/' + table_name + '/data'
         response = requests.post(data_url, json=data_json)
-        if response.status_code == 400:
-            return False
-        return True
+        return response.json()
 
     def Data_read(self, database_name, table_name, id_):
         data_url = self.url.split('!')[0] + database_name + '/' + table_name + '/data/' + str(id_)
         response=requests.get(data_url)
         return response.json()
 
-    def Data_update(self, database_name, table_name, new_data_json, id_):
+    def Data_update(self, database_name, table_name, new_data_json):
         data_url = self.url.split('!')[0] + database_name + '/' + table_name + '/data'
         response=requests.put(data_url, json=new_data_json)
-        if response.status_code > 300:
-            return False
-        return True
+        return response.json()
 
     def Data_delete(self, database_name, table_name, id_):
         data_url = self.url.split('!')[0] + database_name + '/' + table_name + '/data/' + str(id_)
@@ -107,7 +103,7 @@ if __name__ == '__main__':
         client.Data_delete(database_name, table_name, ids[-1])
         datax = data.copy()
         datax['uniques']['fagbutt'] = 'jj'
-        client.Data_update(database_name, table_name, datax, ids[-2])
+        client.Data_update(database_name, table_name, datax)
         rex = client.Data_read(database_name, table_name, ids[-2])
         pictured_print(rex)
 
